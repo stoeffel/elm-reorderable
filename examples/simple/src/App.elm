@@ -138,7 +138,7 @@ viewItem index text =
 
 dragConfig : Reorderable.State.Config
 dragConfig =
-    { animate = True }
+    { animate = False }
 
 
 main : Program String Model Msg
