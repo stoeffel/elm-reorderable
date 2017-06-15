@@ -94,9 +94,11 @@ viewPlaceholder maybePlaceholder =
                     , ( "left", toPx placeholder.point.x )
                     , ( "top", toPx placeholder.point.y )
                     , ( "margin", "0" )
+                    , ( "padding", "2em" )
+                    , ( "border", "solid 3px fuchsia" )
                     ]
                 ]
-                [ Html.text "placeholder"
+                [ Html.text placeholder.draggable
                 ]
 
         Nothing ->
