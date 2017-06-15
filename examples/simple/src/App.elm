@@ -17,7 +17,7 @@ type alias Model =
 
 init : String -> ( Model, Cmd Msg )
 init path =
-    ( { dragState = initDragState <| Array.fromList [ "a", "b", "c", "d" ]
+    ( { dragState = initDragState <| Array.fromList <| List.map toString <| List.range 1 20
       }
     , Cmd.none
     )
@@ -73,7 +73,7 @@ updateDrag dragMsg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ viewItems model.dragState.reorderedItems
+        [ viewItems model.dragState.reorderedItems <| Maybe.andThen .destIndex model.dragState.placeholder
         , viewPlaceholder model.dragState.placeholder
         ]
 
@@ -105,26 +105,39 @@ viewPlaceholder maybePlaceholder =
             Html.text ""
 
 
-viewItems : Array String -> Html Msg
-viewItems items =
+viewItems : Array String -> Maybe Int -> Html Msg
+viewItems items maybeDestIndex =
     items
-        |> Array.indexedMap viewItem
+        |> Array.indexedMap (viewItem maybeDestIndex)
         |> Array.toList
         |> div
             [ style
                 [ ( "display", "flex" )
                 , ( "width", "100%" )
+                , ( "flex-wrap", "wrap" )
                 ]
             ]
 
 
-viewItem : Int -> String -> Html Msg
-viewItem index text =
+viewItem : Maybe Int -> Int -> String -> Html Msg
+viewItem maybeDestIndex index text =
+    let
+        styles =
+            if Just index == maybeDestIndex then
+                style
+                    [ ( "padding", "2em" )
+                    , ( "border", "solid 3px #bababa" )
+                    , ( "opacity", "0.5" )
+                    , ( "background-color", "#bababa" )
+                    ]
+            else
+                style
+                    [ ( "padding", "2em" )
+                    , ( "border", "solid 3px fuchsia" )
+                    ]
+    in
     span
-        [ style
-            [ ( "padding", "2em" )
-            , ( "border", "solid 3px fuchsia" )
-            ]
+        [ styles
         , draggable "false"
         , attribute "data-reorderable-index" (toString index)
         ]
