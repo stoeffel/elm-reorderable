@@ -126,6 +126,7 @@ viewItem maybeDestIndex index text =
             if Just index == maybeDestIndex then
                 style
                     [ ( "padding", "2em" )
+                    , ( "margin-bottom", "10px" )
                     , ( "border", "solid 3px #bababa" )
                     , ( "opacity", "0.5" )
                     , ( "background-color", "#bababa" )
@@ -133,6 +134,7 @@ viewItem maybeDestIndex index text =
             else
                 style
                     [ ( "padding", "2em" )
+                    , ( "margin-bottom", "10px" )
                     , ( "border", "solid 3px fuchsia" )
                     ]
     in
