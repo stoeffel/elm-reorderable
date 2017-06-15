@@ -263,7 +263,7 @@ var options = {
     dragMove: app.ports.dragMove.send,
     dragStop: app.ports.dragStop.send
   },
-  initialAxis: "x",
+  initialAxis: "both",
   offsets: {
     touch: { x: 0, y: 0 },
     mouse: { x: 0, y: 0 }
