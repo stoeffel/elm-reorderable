@@ -17,7 +17,7 @@ type alias Model =
 
 init : String -> ( Model, Cmd Msg )
 init path =
-    ( { dragState = initDragState <| Array.fromList <| List.map toString <| List.range 1 20
+    ( { dragState = initDragState <| Array.fromList <| List.map toString <| List.range 1 21
       }
     , Cmd.none
     )
